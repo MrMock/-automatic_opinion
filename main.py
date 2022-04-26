@@ -19,7 +19,7 @@ while True:
         break
     receipt_amount.append(help)
 
-    help = input("Podaj godzine (zaokraglone do gory): ")
+    help = input("Podaj godzine (bez minut, zaokraglone do gory): ")
     if not help:
         break
     receipt_time.append(help)
