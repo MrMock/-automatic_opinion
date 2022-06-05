@@ -6,6 +6,8 @@
 #include <QMainWindow>
 #include <fstream>
 #include <vector>
+#include "script.h"
+
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -35,16 +37,19 @@ private slots:
 
     void on_receipt_date_editingFinished();
 
-private:
+    void on_pushButton_2_clicked();
+
+protected:
     Ui::MainWindow *ui;
     vector<QString> QS_store_number;
     vector<QString> QS_receipt_number;
     vector<QString> QS_receipt_value;
     vector<QString> QS_receipt_time;
     vector<QString> QS_receipt_date;
-
+private:
     void save_receipt();
     void load_receipt();
     void show_saved_receipt();
+    bool is_started;
 };
 #endif // MAINWINDOW_H

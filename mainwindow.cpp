@@ -5,6 +5,7 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
+    is_started=false;
     ui->setupUi(this);
     show_saved_receipt();
 }
@@ -33,6 +34,13 @@ void MainWindow::save_receipt()
 {
     string receipt;
 
+    string date;
+    if(ui->receipt_date->date().day() < 10) date += "0";
+    date += to_string(ui->receipt_date->date().day());
+    if(ui->receipt_date->date().month() < 10) date += "0";
+    date += to_string(ui->receipt_date->date().month());
+    date += to_string(ui->receipt_date->date().year());
+
     receipt = ui->store_number->displayText().toStdString();
     receipt += "\n";
     receipt += ui->receipt_number->displayText().toStdString();
@@ -41,7 +49,7 @@ void MainWindow::save_receipt()
     receipt += "\n";
     receipt += ui->receipt_time->time().toString().toStdString();
     receipt += "\n";
-    receipt += ui->receipt_date->date().toString().toStdString();
+    receipt += date;
     receipt += "\n";
 
 
@@ -100,6 +108,9 @@ void MainWindow::load_receipt()
             while( !file.eof() )
             {
                 getline( file, str );
+                if(str[0] == '\n' || str[0] == ' ' || str == "")
+                    break;
+
                 QS_store_number.push_back(QString::fromStdString(str));
 
                 getline( file, str );
@@ -127,3 +138,16 @@ void MainWindow::show_saved_receipt()
     ui->saved_receipt->setText(QS_saved_receipt);
 
 }
+
+void MainWindow::on_pushButton_2_clicked()
+{
+    Script new_script;
+    new_script.set_store_number(QS_store_number[0].toStdString());
+    new_script.set_receipt_number(QS_receipt_number[0].toStdString());
+    new_script.set_receipt_value(QS_receipt_value[0].toStdString());
+    new_script.set_receipt_time(QS_receipt_time[0].toStdString());
+    new_script.set_receipt_date(QS_receipt_date[0].toStdString());
+    new_script.start();
+    is_started=true;
+}
+
