@@ -2,8 +2,10 @@
 #define MAINWINDOW_H
 
 #define RECEIPTS_PATH "receipts.txt"
+#define HISTORY_PATH "history.txt"
 
 #include <QMainWindow>
+#include <QTimer>
 #include <fstream>
 #include <vector>
 #include "script.h"
@@ -39,17 +41,22 @@ private slots:
 
     void on_pushButton_2_clicked();
 
-protected:
+
+private:
+    void save_receipt();
+    void load_receipt();
+    void show_saved_receipt();
+    void delete_last_receipt();
+    void save_in_history();
+    void finished_today();
+    void finished_in_this_week();
+    bool is_started;
+
     Ui::MainWindow *ui;
     vector<QString> QS_store_number;
     vector<QString> QS_receipt_number;
     vector<QString> QS_receipt_value;
     vector<QString> QS_receipt_time;
     vector<QString> QS_receipt_date;
-private:
-    void save_receipt();
-    void load_receipt();
-    void show_saved_receipt();
-    bool is_started;
 };
 #endif // MAINWINDOW_H

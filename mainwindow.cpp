@@ -141,13 +141,109 @@ void MainWindow::show_saved_receipt()
 
 void MainWindow::on_pushButton_2_clicked()
 {
-    Script new_script;
-    new_script.set_store_number(QS_store_number[0].toStdString());
-    new_script.set_receipt_number(QS_receipt_number[0].toStdString());
-    new_script.set_receipt_value(QS_receipt_value[0].toStdString());
-    new_script.set_receipt_time(QS_receipt_time[0].toStdString());
-    new_script.set_receipt_date(QS_receipt_date[0].toStdString());
-    new_script.start();
-    is_started=true;
+
+    int loops;
+    QEventLoop loop;
+    int time_to_wait = ui->spinBox_time_to_wait->value()*60*1000;
+    if(ui->radioButton_amount->isChecked() && ui->spinBox_amount->value() < ui->saved_receipt->text().toInt())
+        loops = ui->spinBox_amount->value();
+    else
+        loops = ui->saved_receipt->text().toInt();
+
+    for(int i = 0; i < loops; i++)
+    {
+        is_started=true;
+
+        if(i != 0)
+        {
+            QTimer::singleShot(time_to_wait, &loop, &QEventLoop::quit);
+            loop.exec();
+        }
+
+        Script new_script;
+        new_script.set_store_number(QS_store_number[0].toStdString());
+        new_script.set_receipt_number(QS_receipt_number[0].toStdString());
+        new_script.set_receipt_value(QS_receipt_value[0].toStdString());
+        new_script.set_receipt_time(QS_receipt_time[0].toStdString());
+        new_script.set_receipt_date(QS_receipt_date[0].toStdString());
+        new_script.start();
+        delete_last_receipt();
+        show_saved_receipt();
+    }
+    is_started=false;
 }
 
+void MainWindow::delete_last_receipt()
+{
+    string receipt;
+
+    fstream file;
+    file.open(RECEIPTS_PATH,ios::out);
+
+    save_in_history();
+
+    if(QS_receipt_number.size() == 1)
+        file << "";
+    else
+    for(unsigned long long i = 1; i < QS_receipt_number.size(); i++)
+    {
+
+        receipt = QS_store_number[i].toStdString();
+        receipt += "\n";
+        receipt += QS_receipt_number[i].toStdString();
+        receipt += "\n";
+        receipt += QS_receipt_value[i].toStdString();
+        receipt += "\n";
+        receipt += QS_receipt_time[i].toStdString();
+        receipt += "\n";
+        receipt += QS_receipt_date[i].toStdString();
+        receipt += "\n";
+
+        file << receipt;
+
+    }   file.close();
+
+    load_receipt();
+}
+
+void MainWindow::save_in_history()
+{
+    string receipt;
+    string str,tmp;
+
+    QDate actual_date;
+    actual_date.currentDate();
+    fstream file;
+    file.open(HISTORY_PATH,ios::out|ios::out);
+
+    if( file.good() )
+    {
+        while( !file.eof() )
+        {
+            getline( file, tmp );
+            str +="\n";
+            str += tmp;
+        }
+    }
+
+    receipt = actual_date.weekNumber();
+    receipt += "\n";
+    receipt += actual_date.toString().toStdString();
+    receipt += "\n";
+    receipt += QS_store_number[0].toStdString();
+    receipt += "\n";
+    receipt += QS_receipt_number[0].toStdString();
+    receipt += "\n";
+    receipt += QS_receipt_value[0].toStdString();
+    receipt += "\n";
+    receipt += QS_receipt_time[0].toStdString();
+    receipt += "\n";
+    receipt += QS_receipt_date[0].toStdString();
+    receipt += "\n";
+    receipt += str;
+
+    file << receipt;
+
+    file.close();
+
+}

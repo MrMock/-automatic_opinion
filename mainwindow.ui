@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>583</width>
-    <height>490</height>
+    <width>614</width>
+    <height>514</height>
    </rect>
   </property>
   <property name="acceptDrops">
@@ -33,26 +33,18 @@
    <widget class="QWidget" name="gridLayoutWidget">
     <property name="geometry">
      <rect>
-      <x>0</x>
-      <y>0</y>
+      <x>10</x>
+      <y>10</y>
       <width>281</width>
       <height>281</height>
      </rect>
     </property>
     <layout class="QGridLayout" name="gridLayout">
-     <item row="3" column="0">
-      <widget class="QLabel" name="label_4">
-       <property name="text">
-        <string>Godzina</string>
-       </property>
-      </widget>
+     <item row="0" column="1">
+      <widget class="QLineEdit" name="store_number"/>
      </item>
-     <item row="0" column="0">
-      <widget class="QLabel" name="label_2">
-       <property name="text">
-        <string>Numer sklepu</string>
-       </property>
-      </widget>
+     <item row="3" column="1">
+      <widget class="QTimeEdit" name="receipt_time"/>
      </item>
      <item row="2" column="0">
       <widget class="QLabel" name="label_3">
@@ -61,21 +53,8 @@
        </property>
       </widget>
      </item>
-     <item row="0" column="1">
-      <widget class="QLineEdit" name="store_number"/>
-     </item>
-     <item row="3" column="1">
-      <widget class="QTimeEdit" name="receipt_time"/>
-     </item>
-     <item row="4" column="0">
-      <widget class="QLabel" name="label_5">
-       <property name="text">
-        <string>Data</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="1">
-      <widget class="QLineEdit" name="receipt_number"/>
+     <item row="2" column="1">
+      <widget class="QLineEdit" name="receipt_value"/>
      </item>
      <item row="1" column="0">
       <widget class="QLabel" name="label">
@@ -84,11 +63,22 @@
        </property>
       </widget>
      </item>
+     <item row="3" column="0">
+      <widget class="QLabel" name="label_4">
+       <property name="text">
+        <string>Godzina</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="0">
+      <widget class="QLabel" name="label_5">
+       <property name="text">
+        <string>Data</string>
+       </property>
+      </widget>
+     </item>
      <item row="4" column="1">
       <widget class="QDateEdit" name="receipt_date"/>
-     </item>
-     <item row="2" column="1">
-      <widget class="QLineEdit" name="receipt_value"/>
      </item>
      <item row="5" column="0" colspan="3">
       <widget class="QPushButton" name="save_button">
@@ -97,13 +87,23 @@
        </property>
       </widget>
      </item>
+     <item row="1" column="1">
+      <widget class="QLineEdit" name="receipt_number"/>
+     </item>
+     <item row="0" column="0">
+      <widget class="QLabel" name="label_2">
+       <property name="text">
+        <string>Numer sklepu</string>
+       </property>
+      </widget>
+     </item>
     </layout>
    </widget>
    <widget class="QWidget" name="gridLayoutWidget_2">
     <property name="geometry">
      <rect>
-      <x>0</x>
-      <y>280</y>
+      <x>10</x>
+      <y>300</y>
       <width>281</width>
       <height>161</height>
      </rect>
@@ -159,18 +159,25 @@
    <widget class="QWidget" name="gridLayoutWidget_3">
     <property name="geometry">
      <rect>
-      <x>290</x>
-      <y>0</y>
+      <x>310</x>
+      <y>10</y>
       <width>291</width>
       <height>121</height>
      </rect>
     </property>
     <layout class="QGridLayout" name="gridLayout_3">
      <item row="0" column="1">
-      <widget class="QSpinBox" name="spinBox"/>
+      <widget class="QSpinBox" name="spinBox_amount">
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+       <property name="value">
+        <number>1</number>
+       </property>
+      </widget>
      </item>
      <item row="0" column="2">
-      <widget class="QRadioButton" name="radioButton">
+      <widget class="QRadioButton" name="radioButton_amount">
        <property name="text">
         <string/>
        </property>
@@ -191,10 +198,23 @@
       </widget>
      </item>
      <item row="2" column="1" colspan="2">
-      <widget class="QSpinBox" name="spinBox_2"/>
+      <widget class="QSpinBox" name="spinBox_time_to_wait">
+       <property name="layoutDirection">
+        <enum>Qt::LeftToRight</enum>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+       <property name="maximum">
+        <number>1440</number>
+       </property>
+       <property name="value">
+        <number>20</number>
+       </property>
+      </widget>
      </item>
      <item row="1" column="2">
-      <widget class="QRadioButton" name="radioButton_2">
+      <widget class="QRadioButton" name="radioButton_all">
        <property name="text">
         <string/>
        </property>
@@ -235,8 +255,8 @@
    <widget class="QWidget" name="formLayoutWidget">
     <property name="geometry">
      <rect>
-      <x>390</x>
-      <y>360</y>
+      <x>410</x>
+      <y>380</y>
       <width>191</width>
       <height>81</height>
      </rect>
@@ -292,7 +312,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>583</width>
+     <width>614</width>
      <height>22</height>
     </rect>
    </property>
