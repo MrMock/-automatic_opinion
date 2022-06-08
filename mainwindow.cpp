@@ -7,6 +7,8 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     show_saved_receipt();
+    show_completed();
+    ui->program_version->setText("08.06.2022");
 }
 
 MainWindow::~MainWindow()
@@ -156,7 +158,7 @@ void MainWindow::on_button_start_clicked()
     ui->button_start->setEnabled(false);
     ui->button_stop->setEnabled(true);
     is_started=true;
-    for(int i = 0; i < loops; i++)
+    /*for(int i = 0; i < loops; i++)
     {
 
 
@@ -175,10 +177,11 @@ void MainWindow::on_button_start_clicked()
         new_script.set_receipt_value(QS_receipt_value[0].toStdString());
         new_script.set_receipt_time(QS_receipt_time[0].toStdString());
         new_script.set_receipt_date(QS_receipt_date[0].toStdString());
-        new_script.start();
+        new_script.start();*/
         delete_last_receipt();
         show_saved_receipt();
-    }
+        show_completed();
+    //}
 
     on_button_stop_clicked();
 }
@@ -187,10 +190,10 @@ void MainWindow::delete_last_receipt()
 {
     string receipt;
 
+    save_in_history();
+
     fstream file;
     file.open(RECEIPTS_PATH,ios::out);
-
-    save_in_history();
 
     if(QS_receipt_number.size() == 1)
         file << "";
@@ -222,9 +225,12 @@ void MainWindow::save_in_history()
     string str,tmp;
 
     QDate actual_date;
-    actual_date.currentDate();
+    actual_date = QDate::currentDate();
+
     fstream file;
-    file.open(HISTORY_PATH,ios::out|ios::in);
+    file.open(HISTORY_PATH, ios::in);
+
+
 
     if( file.good() )
     {
@@ -236,7 +242,10 @@ void MainWindow::save_in_history()
         }
     }
 
-    receipt = actual_date.weekNumber();
+    file.close();
+    file.open(HISTORY_PATH, ios::out);
+
+    receipt =  to_string(actual_date.weekNumber());
     receipt += "\n";
     receipt += actual_date.toString().toStdString();
     receipt += "\n";
@@ -264,3 +273,37 @@ void MainWindow::on_button_stop_clicked()
     ui->button_stop->setEnabled(false);
 }
 
+void MainWindow::show_completed()
+{
+    int today = 0;
+    int this_week = 0;
+    int loops = 0;
+
+    QDate actual_date;
+    actual_date = QDate::currentDate();
+
+    string tmp;
+    fstream file;
+    file.open(HISTORY_PATH, ios::in);
+
+    if( file.good() )
+    {
+        while( !file.eof() )
+        {
+            getline( file, tmp );
+
+            if(loops%7 == 0 && tmp == to_string(actual_date.weekNumber()))
+                this_week++;
+
+            if(loops%7 == 1 && tmp == actual_date.toString().toStdString())
+                today++;
+
+            loops++;
+        }
+    }
+    file.close();
+
+    ui->receipt_this_week->setText(QString::fromStdString(to_string(this_week)));
+    ui->receipt_today->setText(QString::fromStdString(to_string(today)));
+
+}

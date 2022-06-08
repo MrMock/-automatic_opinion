@@ -39,8 +39,10 @@ private slots:
 
     void on_receipt_date_editingFinished();
 
-    void on_pushButton_2_clicked();
+    void on_button_start_clicked();
 
+
+    void on_button_stop_clicked();
 
 private:
     void save_receipt();
@@ -50,6 +52,7 @@ private:
     void save_in_history();
     void finished_today();
     void finished_in_this_week();
+    void show_completed();
     bool is_started;
 
     Ui::MainWindow *ui;

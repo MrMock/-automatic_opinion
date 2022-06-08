@@ -124,14 +124,14 @@
       </widget>
      </item>
      <item row="1" column="1">
-      <widget class="QLineEdit" name="lineEdit_5">
+      <widget class="QLineEdit" name="receipt_today">
        <property name="enabled">
         <bool>false</bool>
        </property>
       </widget>
      </item>
      <item row="2" column="1">
-      <widget class="QLineEdit" name="lineEdit_6">
+      <widget class="QLineEdit" name="receipt_this_week">
        <property name="enabled">
         <bool>false</bool>
        </property>
@@ -301,7 +301,7 @@
       </widget>
      </item>
      <item row="2" column="1">
-      <widget class="QLineEdit" name="lineEdit_10">
+      <widget class="QLineEdit" name="program_version">
        <property name="enabled">
         <bool>false</bool>
        </property>
