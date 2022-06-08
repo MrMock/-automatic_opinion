@@ -158,7 +158,7 @@ void MainWindow::on_button_start_clicked()
     ui->button_start->setEnabled(false);
     ui->button_stop->setEnabled(true);
     is_started=true;
-    /*for(int i = 0; i < loops; i++)
+    for(int i = 0; i < loops; i++)
     {
 
 
@@ -177,11 +177,11 @@ void MainWindow::on_button_start_clicked()
         new_script.set_receipt_value(QS_receipt_value[0].toStdString());
         new_script.set_receipt_time(QS_receipt_time[0].toStdString());
         new_script.set_receipt_date(QS_receipt_date[0].toStdString());
-        new_script.start();*/
+        new_script.start();
         delete_last_receipt();
         show_saved_receipt();
         show_completed();
-    //}
+      }
 
     on_button_stop_clicked();
 }
