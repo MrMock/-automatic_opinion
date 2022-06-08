@@ -71,6 +71,7 @@ void Script::import_drivers()
 {
     string str  =                   "from selenium import webdriver\n";
            str +=                   "from selenium.webdriver.common.by import By\n";
+           str +=                   "import sys\n";
            str +=                   "from time import sleep\n";
            str +=                   "link = \"https://survey2.medallia.eu/?lidl-pl-feedless-fs&country=PL&language=PL-PL&prize_draw=Yes&lidlapp=No&CF=14&TNC=";
            str +=                   store_number;
@@ -83,6 +84,7 @@ void Script::import_drivers()
 void Script::id_age()
 {
     string str  =                   "sleep(1)\n";
+           str +=                   "browser.find_element(By.ID, \"buttonBegin\").click()\n";
            str +=                   "browser.find_element(By.ID, \"spl_rng_q_feedback_lms_please_enter_your_receipt_numb\").send_keys(\"";
            str +=                   receipt_number;
            str +=                   "\")\n";
@@ -270,7 +272,8 @@ void Script::button_finish()
 
 void Script::close_browser()
 {
-    string str  =                   "browser.close()";
+    string str  =                   "browser.close()\n";
+           str +=                   "sys.exit()";
 
     save_file(str);
 }

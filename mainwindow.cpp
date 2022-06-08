@@ -5,7 +5,6 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
-    is_started=false;
     ui->setupUi(this);
     show_saved_receipt();
 }
@@ -139,8 +138,9 @@ void MainWindow::show_saved_receipt()
 
 }
 
-void MainWindow::on_pushButton_2_clicked()
+void MainWindow::on_button_start_clicked()
 {
+
 
     int loops;
     QEventLoop loop;
@@ -150,15 +150,24 @@ void MainWindow::on_pushButton_2_clicked()
     else
         loops = ui->saved_receipt->text().toInt();
 
+    if(loops == 0)
+        return;
+
+    ui->button_start->setEnabled(false);
+    ui->button_stop->setEnabled(true);
+    is_started=true;
     for(int i = 0; i < loops; i++)
     {
-        is_started=true;
+
 
         if(i != 0)
         {
             QTimer::singleShot(time_to_wait, &loop, &QEventLoop::quit);
             loop.exec();
         }
+
+        if(!is_started)
+            break;
 
         Script new_script;
         new_script.set_store_number(QS_store_number[0].toStdString());
@@ -170,7 +179,8 @@ void MainWindow::on_pushButton_2_clicked()
         delete_last_receipt();
         show_saved_receipt();
     }
-    is_started=false;
+
+    on_button_stop_clicked();
 }
 
 void MainWindow::delete_last_receipt()
@@ -214,7 +224,7 @@ void MainWindow::save_in_history()
     QDate actual_date;
     actual_date.currentDate();
     fstream file;
-    file.open(HISTORY_PATH,ios::out|ios::out);
+    file.open(HISTORY_PATH,ios::out|ios::in);
 
     if( file.good() )
     {
@@ -247,3 +257,10 @@ void MainWindow::save_in_history()
     file.close();
 
 }
+void MainWindow::on_button_stop_clicked()
+{
+    is_started = false;
+    ui->button_start->setEnabled(true);
+    ui->button_stop->setEnabled(false);
+}
+
