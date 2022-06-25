@@ -92,6 +92,7 @@ void Script::id_age()
            str +=                   "sleep(1)\n";
            str +=                   "browser.find_element(By.XPATH, \"//li[@data-test-name='option-18---29-lat']\").click()\n";
 
+
     save_file(str);
 }
 void Script::general()

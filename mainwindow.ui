@@ -209,7 +209,7 @@
         <number>1440</number>
        </property>
        <property name="value">
-        <number>20</number>
+        <number>60</number>
        </property>
       </widget>
      </item>
@@ -259,27 +259,13 @@
     <property name="geometry">
      <rect>
       <x>410</x>
-      <y>380</y>
+      <y>430</y>
       <width>191</width>
-      <height>81</height>
+      <height>31</height>
      </rect>
     </property>
     <layout class="QFormLayout" name="formLayout">
      <item row="0" column="0">
-      <widget class="QLabel" name="label_12">
-       <property name="text">
-        <string>chrome version</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="0">
-      <widget class="QLabel" name="label_13">
-       <property name="text">
-        <string>webdriver version</string>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="0">
       <widget class="QLabel" name="label_14">
        <property name="text">
         <string>program version</string>
@@ -287,20 +273,6 @@
       </widget>
      </item>
      <item row="0" column="1">
-      <widget class="QLineEdit" name="lineEdit_8">
-       <property name="enabled">
-        <bool>false</bool>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="1">
-      <widget class="QLineEdit" name="lineEdit_9">
-       <property name="enabled">
-        <bool>false</bool>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="1">
       <widget class="QLineEdit" name="program_version">
        <property name="enabled">
         <bool>false</bool>

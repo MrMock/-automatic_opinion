@@ -8,7 +8,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     show_saved_receipt();
     show_completed();
-    ui->program_version->setText("08.06.2022");
+    ui->program_version->setText("26.06.2022");
 }
 
 MainWindow::~MainWindow()
@@ -292,10 +292,10 @@ void MainWindow::show_completed()
         {
             getline( file, tmp );
 
-            if(loops%7 == 0 && tmp == to_string(actual_date.weekNumber()))
+            if(loops%8 == 0 && tmp == to_string(actual_date.weekNumber()))
                 this_week++;
 
-            if(loops%7 == 1 && tmp == actual_date.toString().toStdString())
+            if(loops%8 == 1 && tmp == actual_date.toString().toStdString())
                 today++;
 
             loops++;
