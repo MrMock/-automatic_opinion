@@ -1,16 +1,15 @@
-automatyczne wystawianie opinii o sklepie. 
-zawiera:
+Program for automatically issuing opinions about the store. 
+have:
 
--historie wystawionych opinii,
+-save history,
 
--zapisuje paragony do przyszłych opinii,
+-save receipt for next opinion,
 
--ręczne ustawienie czasu między opiniami,
+-setting a pause between opinions,
 
--ustawienie ilości opinii do wystawienia.
+-setting the number of opinions to be performed.
 
 C++, QT, Python, Selenium.
 
 ![image](https://user-images.githubusercontent.com/16858800/175792394-3df7123b-5986-4cd9-8a66-e754d4f8178a.png)
 
-w pełni działający i systematycznie używany od dłuższego czasu.
